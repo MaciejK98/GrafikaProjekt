@@ -43,51 +43,41 @@ const blocksHeightMap = textureLoader.load("./blocks-height.jpg");
 const blocksRoughness = textureLoader.load("./blocks-roughness.jpg");
 const blocksAmbientOcclusion = textureLoader.load("./blocks-ambientocclusion.jpg");
 
-const brickWallbasecolor = textureLoader.load("./Brick_Wall_017_basecolor.jpg");
-const brickWallnormalMap = textureLoader.load("./Brick_Wall_017_normal.jpg");
-const brickWallheightMap = textureLoader.load("./Brick_Wall_017_height.png");
-const brickWallroughnessMap = textureLoader.load("./Brick_Wall_017_roughness.jpg");
-const brickWallambientOcclusionMap = textureLoader.load("./Brick_Wall_017_ambientOcclusion.jpg");
+const brickWallbasecolor = textureLoader.load("./Wood_Ceiling_Coffers_002_basecolor.jpg");
+const brickWallnormalMap = textureLoader.load("./Wood_Ceiling_Coffers_002_normal.jpg");
+const brickWallheightMap = textureLoader.load("./Wood_Ceiling_Coffers_002_height.png");
 
-const stylizedBirckbasecolor = textureLoader.load("./Stylized_Bricks_001_basecolor.jpg");
-const stylizedBircknormalMap = textureLoader.load("./Stylized_Bricks_001_normal.jpg");
-const stylizedBirckheightMap = textureLoader.load("./Stylized_Bricks_001_height.png");
-const stylizedBirckroughnessMap = textureLoader.load("./Stylized_Bricks_001_roughness.jpg");
-const stylizedBirckambientOcclusionMap = textureLoader.load("./Stylized_Bricks_001_ambientOcclusion.jpg");
+const stylizedBirckbasecolor = textureLoader.load("./Blue_Ice_001_COLOR.jpg");
+const stylizedBircknormalMap = textureLoader.load("./Blue_Ice_001_NORM.jpg");
+const stylizedBirckheightMap = textureLoader.load("./Blue_Ice_001_DISP.png");
 
-const metalPlatebasecolor = textureLoader.load("./Metal_Plate_047_basecolor.jpg");
-const metalPlatenormalMap = textureLoader.load("./Metal_Plate_047_normal.jpg");
-const metalPlateheightMap = textureLoader.load("./Metal_Plate_047_height.png");
-const metalPlateroughnessMap = textureLoader.load("./Metal_Plate_047_roughness.jpg");
-const metalPlateambientOcclusionMap = textureLoader.load("./Metal_Plate_047_ambientOcclusion.jpg");
-const metalPlatemetallic = textureLoader.load("./Metal_Plate_047_metallic.jpg");
+const metalPlatebasecolor = textureLoader.load("./Crystal_003_COLOR.jpg");
+const metalPlatenormalMap = textureLoader.load("./Crystal_003_NORM.jpg");
+const metalPlateheightMap = textureLoader.load("./Crystal_003_DISP.png");
 
-const rocksHexagonbasecolor = textureLoader.load("./Rocks_Hexagons_001_basecolor.jpg");
-const rocksHexagonnormalMap = textureLoader.load("./Rocks_Hexagons_001_normal.jpg");
-const rocksHexagonheightMap = textureLoader.load("./Rocks_Hexagons_001_height.png");
-const rocksHexagonroughnessMap = textureLoader.load("./Rocks_Hexagons_001_roughness.jpg");
-const rocksHexagonambientOcclusionMap = textureLoader.load("./Rocks_Hexagons_001_ambientOcclusion.jpg");
+const rocksHexagonbasecolor = textureLoader.load("./Ground_Dirt_008_basecolor.jpg");
+const rocksHexagonnormalMap = textureLoader.load("./Ground_Dirt_008_normal.jpg");
+const rocksHexagonheightMap = textureLoader.load("./Ground_Dirt_008_height.png");
 
-const lavabasecolor = textureLoader.load("./LAVA_005_COLOR.jpg");
-const lavanormalMap = textureLoader.load("./LAVA_005_NORM.jpg");
-const lavaheightMap = textureLoader.load("./LAVA_005_DISP.png");
-const lavaroughnessMap = textureLoader.load("./LAVA_005_ROUGH.jpg");
-const lavaambientOcclusionMap = textureLoader.load("./LAVA_005_OCC.jpg");
-const lavaemissive = textureLoader.load("./LAVA_005_MASK.jpg");
+const lavabasecolor = textureLoader.load("./LAVA_004_COLOR.jpg");
+const lavanormalMap = textureLoader.load("./LAVA_004_NORM.jpg");
+const lavaheightMap = textureLoader.load("./LAVA_004_DISP.png");
 
-const metalTilesbasecolor = textureLoader.load("./Metal_Tiles_003_basecolor.jpg");
-const metalTilesnormalMap = textureLoader.load("./Metal_Tiles_003_normal.jpg");
-const metalTilesheightMap = textureLoader.load("./Metal_Tiles_003_height.png");
-const metalTilesroughnessMap = textureLoader.load("./Metal_Tiles_003_roughness.jpg");
-const metalTilesambientOcclusionMap = textureLoader.load("./Metal_Tiles_003_ambientOcclusion.jpg");
-const metalTilesmetallic = textureLoader.load("./Metal_Tiles_003_metallic.jpg");
+const metalTilesbasecolor = textureLoader.load("./Wall Stone 004_COLOR.jpg");
+const metalTilesnormalMap = textureLoader.load("./Wall Stone 004_NORM.jpg");
+const metalTilesheightMap = textureLoader.load("./Wall Stone 004_DISP.jpg");
 
-const sphere0 = new THREE.Mesh(new THREE.SphereGeometry(1, 1024, 1024), new THREE.MeshStandardMaterial({ map: brickWallbasecolor, normalMap: brickWallnormalMap, displacementMap: brickWallheightMap, displacementScale: 0.05, roughnessMap: brickWallroughnessMap, roughness: 1, aoMap: brickWallambientOcclusionMap }))
-sphere0.geometry.attributes.uv2 = sphere0.geometry.attributes.uv
-sphere0.position.y = 3
-sphere0.position.x = -4
-sphere0.position.z = 3
-scene.add(sphere0)
+
+const plane1 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.MeshStandardMaterial({ map: brickWallbasecolor }))
+plane1.position.y = 3
+plane1.position.x = -8
+scene.add(plane1)
+
+const plane2 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.MeshStandardMaterial({ map: brickWallbasecolor, normalMap: brickWallnormalMap }))
+plane2.position.y = 3
+plane2.position.x = -5.8
+scene.add(plane2)
+
 
 const cubeRenderTarget = new THREE.WebGLCubeRenderTarget( 128, {
     format: THREE.RGBFormat,
@@ -98,7 +88,16 @@ const cubeRenderTarget = new THREE.WebGLCubeRenderTarget( 128, {
 
 const cubeCamera = new THREE.CubeCamera( 1, 10000, cubeRenderTarget );
 
-const sphere1 = new THREE.Mesh(new THREE.SphereGeometry(1, 1024, 1024), new THREE.MeshStandardMaterial({ map: metalTilesbasecolor, normalMap: metalTilesnormalMap, displacementMap: metalTilesheightMap, displacementScale: 0.08, roughnessMap: metalTilesroughnessMap, roughness: 1, aoMap: metalTilesambientOcclusionMap, metalnessMap: metalTilesmetallic, envMap: cubeRenderTarget.texture }))
+
+const sphere0 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: brickWallbasecolor, normalMap: brickWallnormalMap, displacementMap: brickWallheightMap, displacementScale: 0.05, envMap: cubeRenderTarget.texture }))
+sphere0.geometry.attributes.uv2 = sphere0.geometry.attributes.uv
+sphere0.position.y = 3
+sphere0.position.x = -4
+sphere0.position.z = 3
+scene.add(sphere0)
+
+
+const sphere1 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: metalTilesbasecolor, normalMap: metalTilesnormalMap, displacementMap: metalTilesheightMap, displacementScale: 0.08}))
 sphere1.geometry.attributes.uv2 = sphere1.geometry.attributes.uv
 sphere1.position.y = 3
 sphere1.position.x = 0
@@ -106,7 +105,7 @@ sphere1.position.z = 3
 sphere1.add(cubeCamera)
 scene.add(sphere1)
 
-const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(1, 1024, 1024), new THREE.MeshStandardMaterial({ map: stylizedBirckbasecolor, normalMap: stylizedBircknormalMap, displacementMap: stylizedBirckheightMap, displacementScale: 0.05, roughnessMap: stylizedBirckroughnessMap, roughness: 1, aoMap: stylizedBirckambientOcclusionMap }))
+const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: stylizedBirckbasecolor, normalMap: stylizedBircknormalMap, displacementMap: stylizedBirckheightMap, displacementScale: 0.05}))
 sphere2.geometry.attributes.uv2 = sphere2.geometry.attributes.uv
 sphere2.position.y = 3
 sphere2.position.x = -4
@@ -114,7 +113,7 @@ sphere2.position.z = 6
 // sphere2.add(cubeCamera)
 scene.add(sphere2)
 
-const sphere3 = new THREE.Mesh(new THREE.SphereGeometry(1, 1024, 1024), new THREE.MeshStandardMaterial({ map: metalPlatebasecolor, normalMap: metalPlatenormalMap, displacementMap: metalPlateheightMap, displacementScale: 0.08, roughnessMap: metalPlateroughnessMap, roughness: 1, aoMap: metalPlateambientOcclusionMap, metalnessMap: metalPlatemetallic }))
+const sphere3 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: metalPlatebasecolor, normalMap: metalPlatenormalMap, displacementMap: metalPlateheightMap, displacementScale: 0.08}))
 sphere3.geometry.attributes.uv2 = sphere3.geometry.attributes.uv
 sphere3.position.y = 3
 sphere3.position.x = 0
@@ -122,7 +121,7 @@ sphere3.position.z = 6
 // sphere3.add(cubeCamera)
 scene.add(sphere3)
 
-const sphere4 = new THREE.Mesh(new THREE.SphereGeometry(1, 1024, 1024), new THREE.MeshStandardMaterial({ map: rocksHexagonbasecolor, normalMap: rocksHexagonnormalMap, displacementMap: rocksHexagonheightMap, displacementScale: 0.1, roughnessMap: rocksHexagonroughnessMap, roughness: 1, aoMap: rocksHexagonambientOcclusionMap }))
+const sphere4 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: rocksHexagonbasecolor, normalMap: rocksHexagonnormalMap, displacementMap: rocksHexagonheightMap, displacementScale: 0.1}))
 sphere4.geometry.attributes.uv2 = sphere4.geometry.attributes.uv
 sphere4.position.y = 3
 sphere4.position.x = -4
@@ -130,7 +129,7 @@ sphere4.position.z = 9
 // sphere4.add(cubeCamera)
 scene.add(sphere4)
 
-const sphere5 = new THREE.Mesh(new THREE.SphereGeometry(1, 1024, 1024), new THREE.MeshStandardMaterial({ color: 0xffff66, map: lavabasecolor, normalMap: lavanormalMap, displacementMap: lavaheightMap, displacementScale: 0.1, roughnessMap: lavaroughnessMap, roughness: 1, aoMap: lavaambientOcclusionMap, emissiveMap: lavaemissive }))
+const sphere5 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ color: 0xffff66, map: lavabasecolor, normalMap: lavanormalMap, displacementMap: lavaheightMap, displacementScale: 0.1}))
 sphere5.geometry.attributes.uv2 = sphere5.geometry.attributes.uv
 sphere5.position.y = 3
 sphere5.position.x = 0
