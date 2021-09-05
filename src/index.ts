@@ -34,8 +34,9 @@ camera.lookAt(0, 0, -20)
 scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
 // SCENE
-scene.background = new THREE.Color(0xffffff);
 const textureLoader = new THREE.TextureLoader();
+const background = textureLoader.load("./nebula.jpg");
+scene.background = background;
 
 
 const blocksBaseColor = textureLoader.load("./blocks-basecolor.jpg");
