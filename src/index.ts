@@ -34,6 +34,7 @@ camera.lookAt(0, 0, -20)
 scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
 // SCENE
+
 const textureLoader = new THREE.TextureLoader();
 const background = textureLoader.load("./nebula.jpg");
 scene.background = background;
@@ -53,13 +54,37 @@ const stylizedBirckbasecolor = textureLoader.load("./Blue_Ice_001_COLOR.jpg");
 const stylizedBircknormalMap = textureLoader.load("./Blue_Ice_001_NORM.jpg");
 const stylizedBirckheightMap = textureLoader.load("./Blue_Ice_001_DISP.png");
 
-const metalPlatebasecolor = textureLoader.load("./Crystal_003_COLOR.jpg");
-const metalPlatenormalMap = textureLoader.load("./Crystal_003_NORM.jpg");
-const metalPlateheightMap = textureLoader.load("./Crystal_003_DISP.png");
+const metalPlatebasecolor = textureLoader.load("./Terracota_Tiles_003_basecolor.jpg");
+const metalPlatenormalMap = textureLoader.load("./Terracota_Tiles_003_normal.jpg");
+const metalPlateheightMap = textureLoader.load("./Terracota_Tiles_003_height.png");
+metalPlatebasecolor.wrapS= THREE.RepeatWrapping;
+metalPlatebasecolor.wrapT= THREE.RepeatWrapping;
+metalPlatebasecolor.repeat.x = 3;
+metalPlatebasecolor.repeat.y = 2; 
+metalPlatenormalMap.wrapS= THREE.RepeatWrapping;
+metalPlatenormalMap.wrapT= THREE.RepeatWrapping;
+metalPlatenormalMap.repeat.x = 3;
+metalPlatenormalMap.repeat.y = 2; 
+metalPlateheightMap.wrapS= THREE.RepeatWrapping;
+metalPlateheightMap.wrapT= THREE.RepeatWrapping;
+metalPlateheightMap.repeat.x = 3;
+metalPlateheightMap.repeat.y = 2; 
 
 const rocksHexagonbasecolor = textureLoader.load("./Ground_Dirt_008_basecolor.jpg");
 const rocksHexagonnormalMap = textureLoader.load("./Ground_Dirt_008_normal.jpg");
 const rocksHexagonheightMap = textureLoader.load("./Ground_Dirt_008_height.png");
+rocksHexagonbasecolor.wrapS= THREE.RepeatWrapping;
+rocksHexagonbasecolor.wrapT= THREE.RepeatWrapping;
+rocksHexagonbasecolor.repeat.x = 3;
+rocksHexagonbasecolor.repeat.y = 2; 
+rocksHexagonnormalMap.wrapS= THREE.RepeatWrapping;
+rocksHexagonnormalMap.wrapT= THREE.RepeatWrapping;
+rocksHexagonnormalMap.repeat.x = 3;
+rocksHexagonnormalMap.repeat.y = 2; 
+rocksHexagonheightMap.wrapS= THREE.RepeatWrapping;
+rocksHexagonheightMap.wrapT= THREE.RepeatWrapping;
+rocksHexagonheightMap.repeat.x = 3;
+rocksHexagonheightMap.repeat.y = 2      ; 
 
 const lavabasecolor = textureLoader.load("./LAVA_004_COLOR.jpg");
 const lavanormalMap = textureLoader.load("./LAVA_004_NORM.jpg");
@@ -107,7 +132,7 @@ sphere1.position.z = 3
 sphere1.add(cubeCamera)
 scene.add(sphere1)
 
-const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: stylizedBirckbasecolor, normalMap: stylizedBircknormalMap, displacementMap: stylizedBirckheightMap, displacementScale: 0.05}))
+const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: stylizedBirckbasecolor, normalMap: stylizedBircknormalMap, displacementMap: stylizedBirckheightMap, displacementScale: 0.05} ))
 sphere2.geometry.attributes.uv2 = sphere2.geometry.attributes.uv
 sphere2.position.y = 3
 sphere2.position.x = -4
@@ -123,7 +148,7 @@ sphere3.position.z = 6
 // sphere3.add(cubeCamera)
 scene.add(sphere3)
 
-const sphere4 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: rocksHexagonbasecolor, normalMap: rocksHexagonnormalMap, displacementMap: rocksHexagonheightMap, displacementScale: 0.1}))
+const sphere4 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: rocksHexagonbasecolor, normalMap: rocksHexagonnormalMap, displacementMap: rocksHexagonheightMap, displacementScale: 0.075}))
 sphere4.geometry.attributes.uv2 = sphere4.geometry.attributes.uv
 sphere4.position.y = 3
 sphere4.position.x = -4
