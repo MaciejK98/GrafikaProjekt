@@ -36,7 +36,6 @@ scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 // SCENE
 scene.background = new THREE.Color(0xffffff);
 const textureLoader = new THREE.TextureLoader();
-const grassNormalMap = textureLoader.load("./grass_normal_map.png");
 
 const blocksBaseColor = textureLoader.load("./blocks-basecolor.jpg");
 const blocksNormalMap = textureLoader.load("./blocks-normal.jpg");
@@ -82,17 +81,6 @@ const metalTilesheightMap = textureLoader.load("./Metal_Tiles_003_height.png");
 const metalTilesroughnessMap = textureLoader.load("./Metal_Tiles_003_roughness.jpg");
 const metalTilesambientOcclusionMap = textureLoader.load("./Metal_Tiles_003_ambientOcclusion.jpg");
 const metalTilesmetallic = textureLoader.load("./Metal_Tiles_003_metallic.jpg");
-
-// FLOOR
-for (var i = -50; i <= 50; i += 5) {
-    for (var j = -50; j <= 50; j += 5) {
-        const plane = new THREE.Mesh(new THREE.PlaneGeometry(5, 5, 1), new THREE.MeshPhongMaterial({ color: 0x0a7d15, normalMap: grassNormalMap }));
-        plane.position.x = i;
-        plane.position.z = j;
-        plane.rotation.x = - Math.PI / 2
-        scene.add(plane);
-    }
-}
 
 const sphere0 = new THREE.Mesh(new THREE.SphereGeometry(1, 1024, 1024), new THREE.MeshStandardMaterial({ map: brickWallbasecolor, normalMap: brickWallnormalMap, displacementMap: brickWallheightMap, displacementScale: 0.05, roughnessMap: brickWallroughnessMap, roughness: 1, aoMap: brickWallambientOcclusionMap }))
 sphere0.geometry.attributes.uv2 = sphere0.geometry.attributes.uv
