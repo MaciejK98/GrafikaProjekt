@@ -37,6 +37,7 @@ scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 scene.background = new THREE.Color(0xffffff);
 const textureLoader = new THREE.TextureLoader();
 
+
 const blocksBaseColor = textureLoader.load("./blocks-basecolor.jpg");
 const blocksNormalMap = textureLoader.load("./blocks-normal.jpg");
 const blocksHeightMap = textureLoader.load("./blocks-height.jpg");
@@ -129,7 +130,7 @@ sphere4.position.z = 9
 // sphere4.add(cubeCamera)
 scene.add(sphere4)
 
-const sphere5 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ color: 0xffff66, map: lavabasecolor, normalMap: lavanormalMap, displacementMap: lavaheightMap, displacementScale: 0.1}))
+const sphere5 = new THREE.Mesh(new THREE.SphereGeometry(1, 512, 512), new THREE.MeshStandardMaterial({ map: lavabasecolor, normalMap: lavanormalMap, displacementMap: lavaheightMap, displacementScale: 0.15}))
 sphere5.geometry.attributes.uv2 = sphere5.geometry.attributes.uv
 sphere5.position.y = 3
 sphere5.position.x = 0
@@ -151,7 +152,18 @@ function animate() {
     const time = Date.now() * 0.0005;
     directionalLight.position.x =  Math.sin(time * 0.7) * 20;
     directionalLight.position.z = Math.abs( Math.cos(time * 0.7) ) * 20;
-
+    sphere0.rotateX(-0.001);
+    sphere0.rotateY(-0.005);
+    sphere1.rotateX(0.001);
+    sphere1.rotateY(0.005);
+    sphere2.rotateX(-0.001);
+    sphere2.rotateY(-0.005);
+    sphere3.rotateX(0.001);
+    sphere3.rotateY(0.005);
+    sphere4.rotateX(-0.001);
+    sphere4.rotateY(-0.005);
+    sphere5.rotateX(0.001);
+    sphere5.rotateY(0.005);
     controls.update();
 
     cubeCamera.update( renderer, scene );
