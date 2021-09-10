@@ -12,7 +12,8 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 // CONTROLS
-const controls = new OrbitControls(camera, renderer.domElement);
+// const 
+var controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.update();
 
@@ -25,10 +26,12 @@ export function onWindowResize() {
 window.addEventListener('resize', onWindowResize);
 
 // INIT CAMERA
-camera.position.z = 8;
-camera.position.x = 20;
+camera.position.z = 20;
+camera.position.x = 6;
 camera.position.y = 8;
-camera.lookAt(0, 0, -20)
+controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
+controls.target = new THREE.Vector3(6, 3, 3);
+// camera.lookAt(0, 0, -20)
 
 // INIT HEMISPHERE LIGHT
 scene.add(new THREE.AmbientLight(0xffffff, 0.5));
@@ -263,10 +266,82 @@ function animate() {
     sphere5.rotateY(0.005);
     controls.update();
 
-    cubeCamera.update( renderer, scene );
+    //cubeCamera.update( renderer, scene );
 
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
 }
 document.body.appendChild(renderer.domElement);
 animate();
+
+
+
+document.addEventListener('keypress', (event) => {
+    var name = event.key;
+    var code = event.code;
+    // Alert the key name and key code on keydown
+    //alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+
+    if(name =="1"){
+        camera.position.z = 10;
+        camera.position.x = -4;
+        camera.position.y = 4;
+        
+        controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
+        controls.target = new THREE.Vector3(-4, 3, 3);
+        
+    }
+    if(name =="2"){
+        camera.position.z = 10;
+        camera.position.x = 0;
+        camera.position.y = 4;
+        
+        controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
+        controls.target = new THREE.Vector3(0, 3, 3);
+    }
+    if(name =="3"){
+        camera.position.z = 10;
+        camera.position.x = 4;
+        camera.position.y = 4;
+
+        controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
+        controls.target = new THREE.Vector3(4, 3, 3);
+        
+    }
+    if(name =="4"){
+        camera.position.z = 10;
+        camera.position.x = 8;
+        camera.position.y = 4;
+
+        controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
+        controls.target = new THREE.Vector3(8, 3, 3);
+    }
+    if(name =="5"){
+
+        camera.position.z = 10;
+        camera.position.x = 12;
+        camera.position.y = 4;
+
+        controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
+        controls.target = new THREE.Vector3(12, 3, 3);
+        
+    }
+    if(name =="6"){
+        camera.position.z = 10;
+        camera.position.x = 16;
+        camera.position.y = 4;
+
+        controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
+        controls.target = new THREE.Vector3(16, 3, 3);
+        
+    }
+    if(name =="r"){
+        camera.position.z = 20;
+        camera.position.x = 6;
+        camera.position.y = 8;
+        controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
+        controls.target = new THREE.Vector3(6, 3, 3);
+        
+    }
+
+  }, false);
