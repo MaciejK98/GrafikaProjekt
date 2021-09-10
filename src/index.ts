@@ -1,6 +1,8 @@
 import *  as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
+console.log("To move camera use your mouse. You can pick 7 default camera positions, just click number from 1 to 6. To reset perspective click 'r' ")
+
 // SCENE
 const scene = new THREE.Scene();
 
@@ -31,7 +33,7 @@ camera.position.x = 6;
 camera.position.y = 8;
 controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
 controls.target = new THREE.Vector3(6, 3, 3);
-// camera.lookAt(0, 0, -20)
+
 
 // INIT HEMISPHERE LIGHT
 scene.add(new THREE.AmbientLight(0xffffff, 0.5));
@@ -202,7 +204,7 @@ sphere1.geometry.attributes.uv2 = sphere1.geometry.attributes.uv
 sphere1.position.y = 3
 sphere1.position.x = 8
 sphere1.position.z = 3
-// sphere1.add(cubeCamera)
+
 scene.add(sphere1)
 
 const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count,poligon_count), new THREE.MeshStandardMaterial({ map: iceBase, normalMap: iceNormal, displacementMap: iceHeight, displacementScale: 0.05} ))
@@ -210,7 +212,7 @@ sphere2.geometry.attributes.uv2 = sphere2.geometry.attributes.uv
 sphere2.position.y = 3
 sphere2.position.x = 16
 sphere2.position.z = 3
-// sphere2.add(cubeCamera)
+
 scene.add(sphere2)
 
 const sphere3 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count,poligon_count), new THREE.MeshStandardMaterial({ map: teracotaPlatebasecolor, normalMap: teracotaPlatenormalMap, displacementMap: teracotaPlateheightMap, displacementScale: 0.05}))
@@ -218,7 +220,7 @@ sphere3.geometry.attributes.uv2 = sphere3.geometry.attributes.uv
 sphere3.position.y = 3
 sphere3.position.x = 4
 sphere3.position.z = 3
-// sphere3.add(cubeCamera)
+
 scene.add(sphere3)
 
 const sphere4 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count,poligon_count), new THREE.MeshStandardMaterial({ map: dirtBase, normalMap: dirtNormal, displacementMap: dirtHeight, displacementScale: 0.05}))
@@ -226,7 +228,7 @@ sphere4.geometry.attributes.uv2 = sphere4.geometry.attributes.uv
 sphere4.position.y = 3
 sphere4.position.x = 0
 sphere4.position.z = 3
-// sphere4.add(cubeCamera)
+
 scene.add(sphere4)
 
 const sphere5 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count, poligon_count), new THREE.MeshStandardMaterial({ map: lavabasecolor, normalMap: lavanormalMap, displacementMap: lavaheightMap, displacementScale: 0.1}))
@@ -234,7 +236,7 @@ sphere5.geometry.attributes.uv2 = sphere5.geometry.attributes.uv
 sphere5.position.y = 3
 sphere5.position.x = 12
 sphere5.position.z = 3
-// sphere5.add(cubeCamera)
+
 scene.add(sphere5)
 
 // DIRECTIONAL LIGHT
@@ -244,7 +246,7 @@ directionalLight.position.y += 20
 directionalLight.position.z += 20
 scene.add(directionalLight);
 
-// scene.add(new THREE.CameraHelper(directionalLight.shadow.camera));
+
 
 // ANIMATE
 function animate() {
@@ -266,7 +268,7 @@ function animate() {
     sphere5.rotateY(0.005);
     controls.update();
 
-    //cubeCamera.update( renderer, scene );
+    
 
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
@@ -275,12 +277,10 @@ document.body.appendChild(renderer.domElement);
 animate();
 
 
-
+//changes in the position of the camera
 document.addEventListener('keypress', (event) => {
     var name = event.key;
     var code = event.code;
-    // Alert the key name and key code on keydown
-    //alert(`Key pressed ${name} \r\n Key code value: ${code}`);
 
     if(name =="1"){
         camera.position.z = 10;
@@ -345,3 +345,4 @@ document.addEventListener('keypress', (event) => {
     }
 
   }, false);
+  
