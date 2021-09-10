@@ -278,12 +278,14 @@ visibilityController.onChange(
         visibility = !visibility
         if(visibility) {
             sphere0.material.displacementScale = sphere1.material.displacementScale = sphere2.material.displacementScale = sphere3.material.displacementScale = sphere4.material.displacementScale = sphere5.material.displacementScale = 0.075
+            sphere1.material.displacementScale = 0.05
             plane6.material.displacementScale = plane1.material.displacementScale = plane2.material.displacementScale = plane3.material.displacementScale = plane4.material.displacementScale = plane5.material.displacementScale = 0.05
             plane1.material.normalScale = plane2.material.normalScale = plane3.material.normalScale = plane4.material.normalScale = plane5.material.normalScale = plane6.material.normalScale = new Vector2(1,1)
             sphere0.material.normalScale = sphere1.material.normalScale = sphere2.material.normalScale = sphere3.material.normalScale = sphere4.material.normalScale = sphere5.material.normalScale = new Vector2(1,1)
         }
         else {
             sphere0.material.displacementScale = sphere1.material.displacementScale = sphere2.material.displacementScale = sphere3.material.displacementScale = sphere4.material.displacementScale = sphere5.material.displacementScale = 0.0
+            
             plane6.material.displacementScale = plane1.material.displacementScale = plane2.material.displacementScale = plane3.material.displacementScale = plane4.material.displacementScale = plane5.material.displacementScale = 0.0
             plane1.material.normalScale = plane2.material.normalScale = plane3.material.normalScale = plane4.material.normalScale = plane5.material.normalScale = plane6.material.normalScale = new Vector2(0,0)
             sphere0.material.normalScale = sphere1.material.normalScale = sphere2.material.normalScale = sphere3.material.normalScale = sphere4.material.normalScale = sphere5.material.normalScale = new Vector2(0,0)
