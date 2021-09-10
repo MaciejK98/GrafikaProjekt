@@ -1,8 +1,17 @@
 import *  as THREE from 'three'
+import * as dat from 'dat.gui'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 console.log("To move camera use your mouse. You can pick 7 default camera positions, just click number from 1 to 6. To reset perspective click 'r' ")
 
+import { RGBA_ASTC_10x10_Format, Vector2 } from 'three';
+// console.log(dat)
+let visibility = true
+// let visibilityValue =0
+// function changeVisibility(){
+//     visibility = !visibility;
+//     return true
+// }
 // SCENE
 const scene = new THREE.Scene();
 
@@ -44,31 +53,28 @@ const textureLoader = new THREE.TextureLoader();
 const background = textureLoader.load("./nebula.jpg");
 scene.background = background;
 
-
-const blocksBaseColor = textureLoader.load("./blocks-basecolor.jpg");
-const blocksNormalMap = textureLoader.load("./blocks-normal.jpg");
-const blocksHeightMap = textureLoader.load("./blocks-height.jpg");
-const blocksRoughness = textureLoader.load("./blocks-roughness.jpg");
-const blocksAmbientOcclusion = textureLoader.load("./blocks-ambientocclusion.jpg");
-
 const woodCeilingbasecolor = textureLoader.load("./Wood_Ceiling_Coffers_002_basecolor.jpg");
+const planewoodCeilingbasecolor = textureLoader.load("./Wood_Ceiling_Coffers_002_basecolor.jpg");
 const woodCeilingnormalMap = textureLoader.load("./Wood_Ceiling_Coffers_002_normal.jpg");
+const planewoodCeilingnormalMap = textureLoader.load("./Wood_Ceiling_Coffers_002_normal.jpg");
 const woodCeilingheightMap = textureLoader.load("./Wood_Ceiling_Coffers_002_height.png");
+const planewoodCeilingheightMap = textureLoader.load("./Wood_Ceiling_Coffers_002_height.png");
 var y_axis = 1.5;
 var x_axis = 1.5;
-woodCeilingbasecolor.wrapS= THREE.RepeatWrapping;
-woodCeilingbasecolor.wrapT= THREE.RepeatWrapping;
+woodCeilingbasecolor.wrapS= woodCeilingnormalMap.wrapS= woodCeilingheightMap.wrapS= planewoodCeilingbasecolor.wrapS= planewoodCeilingnormalMap.wrapS= planewoodCeilingheightMap.wrapS=THREE.RepeatWrapping;
+woodCeilingbasecolor.wrapT=  woodCeilingnormalMap.wrapT= woodCeilingheightMap.wrapT= planewoodCeilingbasecolor.wrapT=  planewoodCeilingnormalMap.wrapT= planewoodCeilingheightMap.wrapT= THREE.RepeatWrapping;
 woodCeilingbasecolor.repeat.x = woodCeilingnormalMap.repeat.x = woodCeilingheightMap.repeat.x = x_axis;
 woodCeilingbasecolor.repeat.y = woodCeilingnormalMap.repeat.y = woodCeilingheightMap.repeat.y = y_axis;
-woodCeilingnormalMap.wrapS= THREE.RepeatWrapping;
-woodCeilingnormalMap.wrapT= THREE.RepeatWrapping;
-woodCeilingheightMap.wrapS= THREE.RepeatWrapping;
-woodCeilingheightMap.wrapT= THREE.RepeatWrapping;
+
+
 
 
 const iceBase = textureLoader.load("./Blue_Ice_001_COLOR.jpg");
 const iceNormal = textureLoader.load("./Blue_Ice_001_NORM.jpg");
 const iceHeight = textureLoader.load("./Blue_Ice_001_DISP.png");
+const planeiceBase = textureLoader.load("./Blue_Ice_001_COLOR.jpg");
+const planeiceNormal = textureLoader.load("./Blue_Ice_001_NORM.jpg");
+const planeiceHeight = textureLoader.load("./Blue_Ice_001_DISP.png");
 var y_axis = 2;
 var x_axis = 2;
 iceBase.wrapS= THREE.RepeatWrapping;
@@ -84,6 +90,9 @@ iceBase.repeat.y = iceNormal.repeat.y = iceHeight.repeat.y = y_axis;
 const teracotaPlatebasecolor = textureLoader.load("./Terracota_Tiles_003_basecolor.jpg");
 const teracotaPlatenormalMap = textureLoader.load("./Terracota_Tiles_003_normal.jpg");
 const teracotaPlateheightMap = textureLoader.load("./Terracota_Tiles_003_height.png");
+const planeteracotaPlatebasecolor = textureLoader.load("./Terracota_Tiles_003_basecolor.jpg");
+const planeteracotaPlatenormalMap = textureLoader.load("./Terracota_Tiles_003_normal.jpg");
+const planeteracotaPlateheightMap = textureLoader.load("./Terracota_Tiles_003_height.png");
 teracotaPlatebasecolor.wrapS= THREE.RepeatWrapping;
 teracotaPlatebasecolor.wrapT= THREE.RepeatWrapping;
 var y_axis = 2;
@@ -96,9 +105,13 @@ teracotaPlateheightMap.wrapT= THREE.RepeatWrapping;
 teracotaPlatebasecolor.repeat.x = teracotaPlatenormalMap.repeat.x = teracotaPlateheightMap.repeat.x = x_axis;
 teracotaPlatebasecolor.repeat.y = teracotaPlatenormalMap.repeat.y = teracotaPlateheightMap.repeat.y = y_axis;
 
+
 const dirtBase = textureLoader.load("./Ground_Dirt_008_basecolor.jpg");
 const dirtNormal = textureLoader.load("./Ground_Dirt_008_normal.jpg");
 const dirtHeight = textureLoader.load("./Ground_Dirt_008_height.png");
+const planedirtBase = textureLoader.load("./Ground_Dirt_008_basecolor.jpg");
+const planedirtNormal = textureLoader.load("./Ground_Dirt_008_normal.jpg");
+const planedirtHeight = textureLoader.load("./Ground_Dirt_008_height.png");
 dirtBase.wrapS= THREE.RepeatWrapping;
 dirtBase.wrapT= THREE.RepeatWrapping;
 var y_axis = 2;
@@ -111,21 +124,26 @@ dirtHeight.wrapT= THREE.RepeatWrapping;
 dirtBase.repeat.x = dirtNormal.repeat.x = dirtHeight.repeat.x = x_axis;
 dirtBase.repeat.y = dirtNormal.repeat.y = dirtHeight.repeat.y = y_axis;
 
+let lava_Base = "./LAVA_004_COLOR.jpg"
+let lava_Norm = "./LAVA_004_NORM.jpg"
+let lava_Disp = "./LAVA_004_DISP.png"
 
-const lavabasecolor = textureLoader.load("./LAVA_004_COLOR.jpg");
-const lavanormalMap = textureLoader.load("./LAVA_004_NORM.jpg");
-const lavaheightMap = textureLoader.load("./LAVA_004_DISP.png");
-lavabasecolor.wrapS= THREE.RepeatWrapping;
-lavabasecolor.wrapT= THREE.RepeatWrapping;
+const lavabasecolor = textureLoader.load(lava_Base);
+const planelavabasecolor = textureLoader.load(lava_Base);
+const lavanormalMap = textureLoader.load(lava_Norm);
+const planelavanormalMap = textureLoader.load(lava_Norm);
+const lavaheightMap = textureLoader.load(lava_Disp);
+const planelavaheightMap = textureLoader.load(lava_Disp);
+
+lavabasecolor.wrapS= lavanormalMap.wrapS= lavaheightMap.wrapS= planelavabasecolor.wrapS= planelavanormalMap.wrapS= planelavaheightMap.wrapS= THREE.RepeatWrapping;
+lavabasecolor.wrapT =lavanormalMap.wrapT= lavaheightMap.wrapT= planelavabasecolor.wrapT =planelavanormalMap.wrapT= planelavaheightMap.wrapT= THREE.RepeatWrapping;
 var y_axis = 3;
 var x_axis = 3;
 
-lavanormalMap.wrapS= THREE.RepeatWrapping;
-lavanormalMap.wrapT= THREE.RepeatWrapping;
-lavaheightMap.wrapS= THREE.RepeatWrapping;
-lavaheightMap.wrapT= THREE.RepeatWrapping;
 lavabasecolor.repeat.x = lavanormalMap.repeat.x = lavaheightMap.repeat.x = x_axis;
 lavabasecolor.repeat.y = lavanormalMap.repeat.y = lavaheightMap.repeat.y = y_axis;
+
+
 
 let Brick_Wall_Base = "./Brick_Wall_018_basecolor.jpg";
 let Brick_Wall_Normal = "./Brick_Wall_018_normal.jpg"
@@ -143,38 +161,37 @@ var y_axis = 3;
 var x_axis = 3;
 wallStonebasecolor.repeat.x = wallStonenormalMap.repeat.x = wallStoneheightMap.repeat.x = x_axis;
 wallStonebasecolor.repeat.y = wallStonenormalMap.repeat.y = wallStoneheightMap.repeat.y = y_axis;
-planeWallStoneBase.repeat.x = planeWallStonenormalMap.repeat.x = planeWallStoneheightMap.repeat.x = 1;
-planeWallStoneBase.repeat.y = planeWallStonenormalMap.repeat.y = planeWallStoneheightMap.repeat.y = 1;
 
-let numOfSegments =256
 
-const plane1 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({  map: woodCeilingbasecolor, normalMap: woodCeilingnormalMap, displacementMap: woodCeilingheightMap, displacementScale: 0.02 }))
+let numOfSegments =512
+
+const plane1 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({  map: planewoodCeilingbasecolor, normalMap: planewoodCeilingnormalMap, displacementMap: planewoodCeilingheightMap, displacementScale: 0.02 }))
 plane1.geometry.attributes.uv2 = plane1.geometry.attributes.uv
 plane1.position.y = 3
 plane1.position.x = -4
 scene.add(plane1)
 
-const plane2 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: planeWallStoneBase, normalMap: wallStonenormalMap, displacementMap: wallStoneheightMap, displacementScale: 0.019 }))
+const plane2 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: planeWallStoneBase, normalMap: planeWallStonenormalMap, displacementMap: planeWallStoneheightMap, displacementScale: 0.019 }))
 plane2.position.y = 3
 plane2.position.x = 8
 scene.add(plane2)
 
-const plane3 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: teracotaPlatebasecolor, normalMap: teracotaPlatenormalMap, displacementMap: teracotaPlateheightMap, displacementScale: 0.02 }))
+const plane3 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: planeteracotaPlatebasecolor, normalMap: planeteracotaPlatenormalMap, displacementMap: planeteracotaPlateheightMap, displacementScale: 0.02 }))
 plane3.position.y = 3
 plane3.position.x = 4
 scene.add(plane3)
 
-const plane4 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: dirtBase, normalMap: dirtNormal, displacementMap: dirtHeight, displacementScale: 0.02 }))
+const plane4 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: planedirtBase, normalMap: planedirtNormal, displacementMap: planedirtHeight, displacementScale: 0.02 }))
 plane4.position.y = 3
 plane4.position.x = 0
 scene.add(plane4)
 
-const plane5 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: lavabasecolor, normalMap: lavanormalMap, displacementMap: lavaheightMap, displacementScale: 0.02 }))
+const plane5 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: planelavabasecolor, normalMap: planelavanormalMap, displacementMap: planelavaheightMap, displacementScale: 0.02 }))
 plane5.position.y = 3
 plane5.position.x = 12
 scene.add(plane5)
 
-const plane6 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: iceBase, normalMap: iceNormal, displacementMap: iceHeight, displacementScale: 0.02 }))
+const plane6 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({ map: planeiceBase, normalMap: planeiceNormal, displacementMap: planeiceHeight, displacementScale: 0.02 }))
 plane6.position.y = 3
 plane6.position.x = 16
 scene.add(plane6)
@@ -199,7 +216,7 @@ sphere0.position.z = 3
 scene.add(sphere0)
 
 
-const sphere1 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count, poligon_count), new THREE.MeshStandardMaterial({ map: wallStonebasecolor, normalMap: wallStonenormalMap, displacementMap: wallStoneheightMap, displacementScale: 0.05}))
+const sphere1 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count, poligon_count), new THREE.MeshStandardMaterial({ map: wallStonebasecolor, normalMap: wallStonenormalMap, displacementMap: wallStoneheightMap, displacementScale: 0.05 }))
 sphere1.geometry.attributes.uv2 = sphere1.geometry.attributes.uv
 sphere1.position.y = 3
 sphere1.position.x = 8
@@ -207,7 +224,7 @@ sphere1.position.z = 3
 
 scene.add(sphere1)
 
-const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count,poligon_count), new THREE.MeshStandardMaterial({ map: iceBase, normalMap: iceNormal, displacementMap: iceHeight, displacementScale: 0.05} ))
+const sphere2 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count,poligon_count), new THREE.MeshStandardMaterial({ map: iceBase, normalMap: iceNormal, displacementMap: iceHeight, displacementScale: 0.05 } ))
 sphere2.geometry.attributes.uv2 = sphere2.geometry.attributes.uv
 sphere2.position.y = 3
 sphere2.position.x = 16
@@ -215,7 +232,7 @@ sphere2.position.z = 3
 
 scene.add(sphere2)
 
-const sphere3 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count,poligon_count), new THREE.MeshStandardMaterial({ map: teracotaPlatebasecolor, normalMap: teracotaPlatenormalMap, displacementMap: teracotaPlateheightMap, displacementScale: 0.05}))
+const sphere3 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count,poligon_count), new THREE.MeshStandardMaterial({ map: teracotaPlatebasecolor, normalMap: teracotaPlatenormalMap, displacementMap: teracotaPlateheightMap, displacementScale: 0.05 }))
 sphere3.geometry.attributes.uv2 = sphere3.geometry.attributes.uv
 sphere3.position.y = 3
 sphere3.position.x = 4
@@ -223,7 +240,7 @@ sphere3.position.z = 3
 
 scene.add(sphere3)
 
-const sphere4 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count,poligon_count), new THREE.MeshStandardMaterial({ map: dirtBase, normalMap: dirtNormal, displacementMap: dirtHeight, displacementScale: 0.05}))
+const sphere4 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count,poligon_count), new THREE.MeshStandardMaterial({ map: dirtBase, normalMap: dirtNormal, displacementMap: dirtHeight, displacementScale: 0.05 }))
 sphere4.geometry.attributes.uv2 = sphere4.geometry.attributes.uv
 sphere4.position.y = 3
 sphere4.position.x = 0
@@ -246,6 +263,34 @@ directionalLight.position.y += 20
 directionalLight.position.z += 20
 scene.add(directionalLight);
 
+var props = {visibility:true,
+    depthZ_Fraction:0.015,
+barColor: '#000000',
+barDirection:'Vertical'};
+
+var datGui = new dat.GUI();
+
+var visibilityController = datGui.add(props,'visibility').name('Visibility').listen();
+
+visibilityController.onChange(
+    function(newValue) {
+        
+        visibility = !visibility
+        if(visibility) {
+            sphere0.material.displacementScale = sphere1.material.displacementScale = sphere2.material.displacementScale = sphere3.material.displacementScale = sphere4.material.displacementScale = sphere5.material.displacementScale = 0.075
+            plane6.material.displacementScale = plane1.material.displacementScale = plane2.material.displacementScale = plane3.material.displacementScale = plane4.material.displacementScale = plane5.material.displacementScale = 0.05
+            plane1.material.normalScale = plane2.material.normalScale = plane3.material.normalScale = plane4.material.normalScale = plane5.material.normalScale = plane6.material.normalScale = new Vector2(1,1)
+            sphere0.material.normalScale = sphere1.material.normalScale = sphere2.material.normalScale = sphere3.material.normalScale = sphere4.material.normalScale = sphere5.material.normalScale = new Vector2(1,1)
+        }
+        else {
+            sphere0.material.displacementScale = sphere1.material.displacementScale = sphere2.material.displacementScale = sphere3.material.displacementScale = sphere4.material.displacementScale = sphere5.material.displacementScale = 0.0
+            plane6.material.displacementScale = plane1.material.displacementScale = plane2.material.displacementScale = plane3.material.displacementScale = plane4.material.displacementScale = plane5.material.displacementScale = 0.0
+            plane1.material.normalScale = plane2.material.normalScale = plane3.material.normalScale = plane4.material.normalScale = plane5.material.normalScale = plane6.material.normalScale = new Vector2(0,0)
+            sphere0.material.normalScale = sphere1.material.normalScale = sphere2.material.normalScale = sphere3.material.normalScale = sphere4.material.normalScale = sphere5.material.normalScale = new Vector2(0,0)
+        }
+        
+    //do whatever you want...
+});
 
 
 // ANIMATE
