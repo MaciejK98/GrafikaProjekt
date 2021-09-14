@@ -8,14 +8,12 @@
 //--------------------------------------------------------------------------------------------------------//  
 
 // IMPORTS
-
 import *  as THREE from 'three'
 import * as dat from 'dat.gui'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { RGBA_ASTC_10x10_Format, Vector2 } from 'three';
 
 //INSTRUCTION
-
 alert("To move camera use your mouse (zoom - scroll). You can pick 7 default camera positions, just click number from 1 to 6. To reset perspective click 'r' ")
 
 // SCENE
