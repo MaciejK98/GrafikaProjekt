@@ -1,3 +1,7 @@
+
+
+
+
 import *  as THREE from 'three'
 import * as dat from 'dat.gui'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -21,6 +25,8 @@ const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerH
 // RENDERER
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
+
+
 
 // CONTROLS
 // const 
