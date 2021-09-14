@@ -1,17 +1,23 @@
+
+//--------------------------------------------------------------------------------------------------------//  
+//--------------------------------------     AUTHORS       -----------------------------------------------//   
+//--------------------------------------------------------------------------------------------------------//  
+//--------------------------------------   Maciej Kowalka  -----------------------------------------------// 
+//--------------------------------------   Kacper Doleba   -----------------------------------------------//
+//--------------------------------------  Tomasz Żukowski  -----------------------------------------------//
+//--------------------------------------------------------------------------------------------------------//  
+
+// IMPORTS
+
 import *  as THREE from 'three'
 import * as dat from 'dat.gui'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
-console.log("To move camera use your mouse. You can pick 7 default camera positions, just click number from 1 to 6. To reset perspective click 'r' ")
-
 import { RGBA_ASTC_10x10_Format, Vector2 } from 'three';
-// console.log(dat)
-let visibility = true
-// let visibilityValue =0
-// function changeVisibility(){
-//     visibility = !visibility;
-//     return true
-// }
+
+//INSTRUCTION
+
+alert("To move camera use your mouse (zoom - scroll). You can pick 7 default camera positions, just click number from 1 to 6. To reset perspective click 'r' ")
+
 // SCENE
 const scene = new THREE.Scene();
 
@@ -23,7 +29,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 // CONTROLS
-// const 
+ 
 var controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.update();
@@ -43,12 +49,12 @@ camera.position.y = 8;
 controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
 controls.target = new THREE.Vector3(6, 3, 3);
 
-
 // INIT HEMISPHERE LIGHT
 scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
 // SCENE
 
+//TEXTURE LOADING
 const textureLoader = new THREE.TextureLoader();
 const background = textureLoader.load("./nebula.jpg");
 scene.background = background;
@@ -65,7 +71,6 @@ woodCeilingbasecolor.wrapS= woodCeilingnormalMap.wrapS= woodCeilingheightMap.wra
 woodCeilingbasecolor.wrapT=  woodCeilingnormalMap.wrapT= woodCeilingheightMap.wrapT= planewoodCeilingbasecolor.wrapT=  planewoodCeilingnormalMap.wrapT= planewoodCeilingheightMap.wrapT= THREE.RepeatWrapping;
 woodCeilingbasecolor.repeat.x = woodCeilingnormalMap.repeat.x = woodCeilingheightMap.repeat.x = x_axis;
 woodCeilingbasecolor.repeat.y = woodCeilingnormalMap.repeat.y = woodCeilingheightMap.repeat.y = y_axis;
-
 
 
 
@@ -165,6 +170,8 @@ wallStonebasecolor.repeat.y = wallStonenormalMap.repeat.y = wallStoneheightMap.r
 
 let numOfSegments =512
 
+// PLANES
+
 const plane1 = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, numOfSegments,numOfSegments), new THREE.MeshStandardMaterial({  map: planewoodCeilingbasecolor, normalMap: planewoodCeilingnormalMap, displacementMap: planewoodCeilingheightMap, displacementScale: 0.02 }))
 plane1.geometry.attributes.uv2 = plane1.geometry.attributes.uv
 plane1.position.y = 3
@@ -196,17 +203,9 @@ plane6.position.y = 3
 plane6.position.x = 16
 scene.add(plane6)
 
-
-const cubeRenderTarget = new THREE.WebGLCubeRenderTarget( 128, {
-    format: THREE.RGBFormat,
-    generateMipmaps: true,
-    minFilter: THREE.LinearMipmapLinearFilter,
-    encoding: THREE.sRGBEncoding
-} );
-
-const cubeCamera = new THREE.CubeCamera( 1, 10000, cubeRenderTarget );
 var poligon_count = 512;
 
+//SPHERES 
 
 const sphere0 = new THREE.Mesh(new THREE.SphereGeometry(1, poligon_count, poligon_count), new THREE.MeshStandardMaterial({ map: woodCeilingbasecolor, normalMap: woodCeilingnormalMap, displacementMap: woodCeilingheightMap, displacementScale: 0.05 }))
 sphere0.geometry.attributes.uv2 = sphere0.geometry.attributes.uv
@@ -263,12 +262,17 @@ directionalLight.position.y += 20
 directionalLight.position.z += 20
 scene.add(directionalLight);
 
+//VISIBILITY BUTTON
+
+let visibility = true
+
 var props = {visibility:true,
     depthZ_Fraction:0.015,
 barColor: '#000000',
 barDirection:'Vertical'};
 
 var datGui = new dat.GUI();
+
 
 var visibilityController = datGui.add(props,'visibility').name('Visibility').listen();
 
@@ -291,7 +295,6 @@ visibilityController.onChange(
             sphere0.material.normalScale = sphere1.material.normalScale = sphere2.material.normalScale = sphere3.material.normalScale = sphere4.material.normalScale = sphere5.material.normalScale = new Vector2(0,0)
         }
         
-    //do whatever you want...
 });
 
 
@@ -315,16 +318,14 @@ function animate() {
     sphere5.rotateY(0.005);
     controls.update();
 
-    
-
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
 }
 document.body.appendChild(renderer.domElement);
 animate();
 
+//CHANGES IN THE POSITION OF THE CAMERA
 
-//changes in the position of the camera
 document.addEventListener('keypress', (event) => {
     var name = event.key;
     var code = event.code;
@@ -364,7 +365,6 @@ document.addEventListener('keypress', (event) => {
         controls.target = new THREE.Vector3(8, 3, 3);
     }
     if(name =="5"){
-
         camera.position.z = 10;
         camera.position.x = 12;
         camera.position.y = 4;
@@ -382,6 +382,7 @@ document.addEventListener('keypress', (event) => {
         controls.target = new THREE.Vector3(16, 3, 3);
         
     }
+    //restart camera position
     if(name =="r"){
         camera.position.z = 20;
         camera.position.x = 6;
